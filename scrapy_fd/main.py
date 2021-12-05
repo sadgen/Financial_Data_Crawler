@@ -1,3 +1,5 @@
-import os
+from scrapy.cmdline import execute
 
-os.system('scrapy crawl sina_fd')
+# execute(['scrapy','crawl','PriceData'])
+
+execute(['scrapy','crawl','flowdata'])

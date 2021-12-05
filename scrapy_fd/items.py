@@ -10,4 +10,10 @@ class ScrapyFdItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     flowdata = scrapy.Field()
-    code = scrapy.Field()
+    tag = scrapy.Field()
+
+class ScrapyPriceDataItem(scrapy.Item):
+    # define the fields for your item here like:
+    # name = scrapy.Field()
+    pricedata = scrapy.Field()
+    tag = scrapy.Field()

@@ -10,7 +10,7 @@ from sqlalchemy import create_engine
 # 新浪网资金流向，调整页数避免下载过多
 class SinaSpider(scrapy.Spider):
     # spider的名字定义了Scrapy如何定位(并初始化)spider，所以其必须是唯一的
-    name = "sina_fd"
+    name = "flowdata"
 
     # URL列表
     start_urls = ['http://vip.stock.finance.sina.com.cn/moneyflow/#!ssfx!']
@@ -48,7 +48,14 @@ class SinaSpider(scrapy.Spider):
     
     def parse_flowdata(self, response, s):
         flowdata = pd.DataFrame(json.loads(response.xpath('//p/text()').get()))
+        for col in flowdata.columns:
+            if col == 'opendate':
+                flowdata.loc[:, col] = pd.to_datetime(flowdata.loc[:, col])
+            else:
+                flowdata.loc[:, col] = flowdata.loc[:, col].astype('float')
         flowdata.insert(0,'code', s)
         item = ScrapyFdItem()
         item['flowdata'] = flowdata
+        item['tag'] = 'flowdata'
         yield item
+        
