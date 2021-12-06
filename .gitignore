@@ -1,2 +1,5 @@
 settings.py
 *.pyc
+log.txt
+*.db.dat
+*.db.dir
