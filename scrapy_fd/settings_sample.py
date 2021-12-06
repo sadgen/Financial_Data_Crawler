@@ -18,7 +18,7 @@ NEWSPIDER_MODULE = 'scrapy_fd.spiders'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
-
+LOG_FILE = 'log.txt'
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
 
@@ -34,7 +34,7 @@ CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
 COOKIES_ENABLED = False
-
+DELTAFETCH_ENABLED = True
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False
 
@@ -49,7 +49,9 @@ COOKIES_ENABLED = False
 #SPIDER_MIDDLEWARES = {
 #    'scrapy_fd.middlewares.ScrapyFdSpiderMiddleware': 543,
 #}
-
+SPIDER_MIDDLEWARES = {
+    'scrapy_deltafetch.DeltaFetch': 100,
+}
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
