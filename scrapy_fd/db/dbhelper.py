@@ -65,7 +65,7 @@ class DBHelper():
         dtypes_list = self.mapping_df_types(item[itemtag])
         # 构造sql语句
         r = ','.join(["`" + str(x) + "` " + dtypes_list[x] + " " for x in columns.split(',')])
-        sql = "create table if not exists `" + itemtag + "` (" + r + ")ENGINE=InnoDB DEFAULT CHARSET=utf8;"
+        sql = "create table if not exists `" + itemtag + "` (`id` INT PRIMARY KEY AUTO_INCREMENT, " + r + ")ENGINE=InnoDB DEFAULT CHARSET=utf8;"
         tx.execute(sql)
         insert_sql = "replace into " + itemtag + " (" + columns + ") values (" + s_count[:-1] + ")"
         tx.executemany(insert_sql, data_list)
